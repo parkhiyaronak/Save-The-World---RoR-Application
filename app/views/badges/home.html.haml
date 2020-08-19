@@ -1,0 +1,25 @@
+%h4 Superheros! that will save the world! 
+.card-group{:style => "display: inline-block"}
+  -@characters.each do |character|
+    .card.text-white.bg-dark.mb-3{:style => "max-width: 18rem; border-style: solid; border-width: 2px"}
+      %img.card-img-top{:style => "width: 178px; height: 180px", :alt => "", :src => "#{character["thumbnail"]["path"]}.jpg"}
+      .card-body
+        %h4.card-title
+          Hero:
+          = character["name"]
+      %ul.list-group.list-group-flush
+        %li.list-group-item
+          Comics:
+          = character["comics"]["available"]
+        %li.list-group-item
+          Series:
+          = character["series"]["available"]
+        %li.list-group-item
+          Stories:
+          = character["stories"]["available"]
+      .card-body Best resistance fighter? Check it out their badges!
+      .card-footer
+        %button.btn.btn-success
+          = link_to('Assign Badge!', badges_path(character: character["id"])) #passng character id as an paramter in order to assign the badge to this specific character hero
+        %button.btn.btn-success
+          = link_to('Show Total Badges!', total_badge_badges_path(character: character["id"])) #passng character id as an paramter in order to get the total badges this specific character hero has

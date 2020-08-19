@@ -1,0 +1,25 @@
+- if @total_badges.present?
+  %h4 This Superhero has following bages!
+  .card-group{:style => "display: inline-block"}
+    -@total_badges.each do |badge|
+      .card.text-white.bg-dark.mb-3{:style => "max-width: 18rem; border-style: solid; border-width: 2px"}
+        %img.card-img-top{:style => "width: 178px; height: 180px", :alt => "", :src => "#{badge["image_url"]}"}
+        .card-body
+          %h4.card-title
+            Badge:
+            = badge["badge_template"]["name"]
+        %ul.list-group.list-group-flush
+          %li.list-group-item
+            Summary:
+            = badge["issuer"]["summary"]
+          %li.list-group-item
+            State:
+            = badge["state"]
+        .card-footer
+        %button.btn.btn-success
+          = link_to('Find Superhero!', root_path)
+- else
+  Oopz! It seems this Superhero doesn't have any badges!
+  %p
+  = link_to('Checkout out other Heros!', root_path)
+

@@ -1,0 +1,22 @@
+%h4 All the available badge templates
+.card-group{:style => "display: inline-block"}
+  -@all_badges_templates.each do |badge|
+    .card.text-white.bg-dark.mb-3{:style => "max-width: 18rem; border-style: solid; border-width: 2px"}
+      %img.card-img-top{:style => "width: 178px; height: 180px", :alt => "", :src => "#{badge["image_url"]}"}
+      .card-body
+        %h4.card-title
+          Badge:
+          = badge["name"]
+      %ul.list-group.list-group-flush
+        %li.list-group-item
+          Issued Count:
+          = badge["get_issue_count"]
+        %li.list-group-item
+          Owned by:
+          = badge["owner"]["name"]
+      .card-body Org behind this badge?
+      %a.card-link{:href => "#{badge["url"]}"} Click here for more details..
+      .card-body Do you wanna assign this badge?
+      .card-footer
+      = form_for(:post, :url => assign_badge_badges_path(character: @character, template: badge["id"])) do |f|
+        = f.submit 'Assign this Badge', :class => 'btn.btn-success'
